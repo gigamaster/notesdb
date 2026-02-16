@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square150x150logo src="https://gigamaster.github.io/notesdb/mstile-150.png"/>
+            <square310x310logo src="https://gigamaster.github.io/notesdb/mstile-310.png"/>
+            <TileColor>#18181b</TileColor>
+        </tile>
+    </msapplication>
+</browserconfig>

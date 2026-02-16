@@ -3,280 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NotesDB</title>
-    
-    <!-- @ai-instruction: specific-imports-only -->
-    <!-- Instruction: Only add new imports, do not change version, do not reorder existing  -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
-    <style type="text/tailwindcss">
-      @theme {
-        --color-zinc-850: #1f1f22;
-        --color-zinc-950: #0c0c0e;
-        --font-sans: 'Inter', sans-serif;
-      }
-      
-      /* Load Typography Plugin */
-      @plugin "@tailwindcss/typography";
-
-      /* Custom Utility for 11-column grid (Color Picker) */
-      @utility grid-cols-11 {
-        grid-template-columns: repeat(11, minmax(0, 1fr));
-      }
-
-      /* Custom Scrollbar & Utility Layers
-      @layer utilities {
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: var(--color-zinc-950); 
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: var(--color-zinc-800); 
-            border-radius: 3px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: var(--color-zinc-700); 
-        }
-      } */
-
-      *::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-        scrollbar-gutter: stable;
-      }
-
-      *::-webkit-scrollbar-track {
-        background: var(--color-zinc-900, #18181b);
-      }
-
-      *::-webkit-scrollbar-thumb {
-        background: var(--color-zinc-800, #27272a);
-        border-radius: 3px;
-      }
-
-      *::-webkit-scrollbar-thumb:hover {
-        background: var(--color-zinc-700, #3f3f47);
-      }
-
-      :root {
-        color-scheme: dark; /* Forces native inputs (date, time, file) and scrollbars to dark mode */
-      }
-
-      body {
-        background-color: #000;
-        color: #d4d4d8;
-      }
-      
-      /* Tiptap Editor Styles */
-      .ProseMirror {
-        outline: none;
-        min-height: 200px;
-      }
-      .ProseMirror p.is-editor-empty:first-child::before {
-        color: #52525b;
-        content: attr(data-placeholder);
-        float: left;
-        height: 0;
-        pointer-events: none;
-      }
-
-      /* Table Styles */
-      .ProseMirror table {
-        border-collapse: collapse;
-        table-layout: fixed;
-        width: 100%;
-        margin: 0;
-        overflow: hidden;
-      }
-      .ProseMirror table td,
-      .ProseMirror table th {
-        min-width: 1em;
-        border: 1px solid #3f3f46; /* zinc-700 */
-        padding: 6px 8px;
-        vertical-align: top;
-        box-sizing: border-box;
-        position: relative;
-      }
-      .ProseMirror table th {
-        font-weight: bold;
-        text-align: left;
-        background-color: #18181b; /* zinc-900 */
-      }
-      .ProseMirror table .selectedCell:after {
-        z-index: 2;
-        position: absolute;
-        content: "";
-        left: 0; right: 0; top: 0; bottom: 0;
-        background: rgba(99, 102, 241, 0.2); /* indigo-500/20 */
-        pointer-events: none;
-      }
-
-      /* Highlight.js overrides for Tiptap integration */
-      pre {
-        background: #0d0d0d;
-        color: #fff;
-        font-family: 'JetBrainsMono', monospace;
-        padding: 0.75rem 1rem;
-        border-radius: 0.5rem;
-      }
-      pre code {
-        color: inherit;
-        padding: 0;
-        background: none;
-        font-size: 0.8rem;
-      }
-      
-      /* Image Styles in Editor */
-      .ProseMirror img {
-        border-radius: 0.5rem;
-        max-width: 100%;
-        height: auto;
-      }
-      .ProseMirror img.ProseMirror-selectednode {
-        outline: 2px solid #6366f1;
-      }
-      
-      /* Video/Embed Styles */
-      .ProseMirror iframe {
-        border-radius: 0.5rem;
-        border: 1px solid #27272a;
-        background: #000;
-      }
-      .ProseMirror div[data-youtube-video] {
-        cursor: move;
-        padding-right: 24px;
-      }
-      /* NoteLink Styles */
-      .note-link {
-        color: #818cf8; /* indigo-400 */
-        cursor: pointer;
-        text-decoration: none;
-        background: rgba(99, 102, 241, 0.1);
-        padding: 0 4px;
-        border-radius: 4px;
-        transition: all 0.2s;
-      }
-      .note-link:hover {
-        background: rgba(99, 102, 241, 0.2);
-        text-decoration: underline;
-      }
-
-      /* Tippy.js Custom Theme (Zinc) */
-      .tippy-box[data-theme~='zinc'] {
-        background-color: #18181b; /* zinc-900 */
-        color: #e4e4e7; /* zinc-200 */
-        border: 1px solid #27272a; /* zinc-800 */
-        border-radius: 6px;
-        font-size: 11px;
-        font-weight: 500;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
-        padding: 2px 4px;
-      }
-      
-      /* Tippy Animation: Shift-Away (Simulated) */
-      .tippy-box[data-animation='shift-away'][data-state='hidden'] {
-        opacity: 0;
-      }
-      .tippy-box[data-animation='shift-away'] {
-        transform-origin: bottom;
-        transition-property: transform, visibility, opacity;
-      }
-      .tippy-box[data-animation='shift-away'][data-state='hidden'][data-placement^='top'] {
-        transform: translateY(10px);
-      }
-      .tippy-box[data-animation='shift-away'][data-state='hidden'][data-placement^='bottom'] {
-        transform: translateY(-10px);
-      }
-
-      /* Print Styles */
-      @media print {
-        body {
-          background-color: white;
-          color: black;
-        }
-        aside, header, nav, button, .no-print {
-          display: none !important;
-        }
-        /* Ensure main content takes full width */
-        main {
-          position: static;
-          width: 100%;
-          margin: 0;
-          padding: 0;
-          overflow: visible;
-        }
-        /* Hide scrollbars in print */
-        ::-webkit-scrollbar {
-          display: none;
-        }
-      }
-    </style>
-
-  <!-- @ai-instruction: specific-imports-only -->
-  <!-- Instruction: Only add new imports, do not change version @tiptap/core@3.19.0, do not reorder existing  -->
-
-<link rel="stylesheet" href="/index.css">
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@18.3.1",
-    "react/": "https://esm.sh/react@18.3.1/",
-    "react-dom": "https://esm.sh/react-dom@18.3.1?deps=react@18.3.1",
-    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client?deps=react@18.3.1",
-    "react-dom/": "https://esm.sh/react-dom@18.3.1/?deps=react@18.3.1",
-    "lucide-react": "https://esm.sh/lucide-react@0.564.0?deps=react@18.3.1",
-    "@tiptap/core": "https://esm.sh/@tiptap/core@3.19.0?deps=react@18.3.1",
-    "@tiptap/react": "https://esm.sh/@tiptap/react@3.19.0?deps=react@18.3.1",
-    "@tiptap/suggestion": "https://esm.sh/@tiptap/suggestion@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-document": "https://esm.sh/@tiptap/extension-document@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-paragraph": "https://esm.sh/@tiptap/extension-paragraph@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-text": "https://esm.sh/@tiptap/extension-text@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-bold": "https://esm.sh/@tiptap/extension-bold@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-italic": "https://esm.sh/@tiptap/extension-italic@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-strike": "https://esm.sh/@tiptap/extension-strike@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-code": "https://esm.sh/@tiptap/extension-code@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-heading": "https://esm.sh/@tiptap/extension-heading@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-bullet-list": "https://esm.sh/@tiptap/extension-bullet-list@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-ordered-list": "https://esm.sh/@tiptap/extension-ordered-list@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-list-item": "https://esm.sh/@tiptap/extension-list-item@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-blockquote": "https://esm.sh/@tiptap/extension-blockquote@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-history": "https://esm.sh/@tiptap/extension-history@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-image": "https://esm.sh/@tiptap/extension-image@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-link": "https://esm.sh/@tiptap/extension-link@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-horizontal-rule": "https://esm.sh/@tiptap/extension-horizontal-rule@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-youtube": "https://esm.sh/@tiptap/extension-youtube@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-text-style": "https://esm.sh/@tiptap/extension-text-style@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-color": "https://esm.sh/@tiptap/extension-color@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-table": "https://esm.sh/@tiptap/extension-table@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-table-row": "https://esm.sh/@tiptap/extension-table-row@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-table-cell": "https://esm.sh/@tiptap/extension-table-cell@3.19.0?deps=react@18.3.1",
-    "@tiptap/extension-table-header": "https://esm.sh/@tiptap/extension-table-header@3.19.0?deps=react@18.3.1",
-    "lowlight": "https://esm.sh/lowlight@^3.3.0",
-    "highlight.js/": "https://esm.sh/highlight.js@^11.11.1/",
-    "@tiptap/extension-code-block-lowlight": "https://esm.sh/@tiptap/extension-code-block-lowlight@3.19.0",
-    "jszip": "https://esm.sh/jszip@3.10.1",
-    "tippy.js": "https://esm.sh/tippy.js@^6.3.7",
-    "@tiptap/pm/": "https://esm.sh/@tiptap/pm@3.19.0/",
-    "react-social-media-embed": "https://esm.sh/react-social-media-embed@2.5.1?deps=react@18.3.1",
-    "three": "https://esm.sh/three@0.169.0",
-    "react-force-graph-3d": "https://esm.sh/react-force-graph-3d@1.25.1?deps=react@18.3.1,three@0.169.0"
-  }
-}
-</script>
-  <script type="module" crossorigin src="/notesdb/assets/index-BewSTdif.js"></script>
+    <title>NotesDB Local-First</title>
+    <meta name="description" content="NotesDB free note-taking with AI LLM, json mapping, calendar, 3D graph view, and bookmark manager" />
+    <meta name="keywords" content="app, SPA, browser, ai free, online, offline, local-first, self-hosted, application, note-taking, Web Crypto API, encrypt, notes, ai, webllm, rag, json, filtering, searching, mapping, bookmar manager, 3d graph, editor" />
+    <meta name="application-name" content="notesdb" />
+    <meta name="author" content="Nuno Luciano" />
+    <meta name="designer" content="Nuno Luciano" />
+    <meta name='copyright' content='2026 NunoLuciano'>
+    <meta name="generator" content="gigamaster/notesdb" />
+    <meta name="distribution" content="Global" />
+    <meta name="rating" content="General" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name='robots' content='index,follow'>
+    <!-- Theme color -->
+    <meta name="theme-color" content="#18181b" />
+    <!-- Favicon --- -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://gigamaster.github.io/notesdb/apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="https://gigamaster.github.io/notesdb/favicon.svg">
+    <link rel="icon" type="image/png" sizes="64x64" href="https://gigamaster.github.io/notesdb/favicon.png">
+    <link rel="shortcut icon" href="https://gigamaster.github.io/notesdb/favicon.ico">
+    <link rel="manifest" href="https://gigamaster.github.io/notesdb/manifest.json">
+    <link rel="mask-icon" href="https://gigamaster.github.io/notesdb/safari-pinned-tab.svg" color="#18181b">
+    <meta name="msapplication-TileColor" content="#18181b">
+    <meta name="msapplication-config" content="https://gigamaster.github.io/notesdb/browserconfig.xml">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="https://gigamaster.github.io/notesdb/" />
+    <meta name="twitter:title" content="NotesDB Local-First" />
+    <meta name="twitter:description" content="NotesDB AI free note-taking with AI LLM, json mapping, calendar, 3D graph view, and bookmark manager." />
+    <meta name="twitter:image" content="https://gigamaster.github.io/notesdb/notesdb-screen.jpg" />
+    <meta name="twitter:creator" content="@nunoluciano" />
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>  
+  <script type="module" crossorigin src="/notesdb/assets/index-DboLLwwP.js"></script>
   <link rel="modulepreload" crossorigin href="/notesdb/assets/vendor-B7FnPyzq.js">
+  <link rel="stylesheet" crossorigin href="/notesdb/assets/index-DZ4kiucw.css">
 </head>
   <body>
     <div id="root"></div>
