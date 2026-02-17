@@ -1,7 +1,44 @@
-# NotesDB
+# NotesDB Local-First
+**version 1.2.7**
 
 NotesDB began as a noise-free tool designed to filter data and focus on essential information. It was originally created as a companion app for Proxy-Web, a client-side server that runs in the browser and generates typed JSON from RSS feeds. Proxy-Web follows a local-first architecture, storing queries in IndexedDB and serving them as an offline-capable API, even during network blackouts.
 Over time, NotesDB naturally evolved into a full-featured note-taking application. It has since been extended with a calendar, a 3D graph view, and a bookmark manager, while maintaining strong privacy through the Web Crypto API for protecting sensitive information.
+
+<picture align="center">
+<img src="./public/notesdb-local-first-workflow.jpg" style="width:auto; height:auto;">
+</picture>
+
+<picture>
+  <img src="./public/4x4.png" alt="Overview" style="width:800px; height:32px">
+</picture>
+
+### Create a Note or import JSON 
+
+**Smart Import Wizard**: Auto-detects collections in JSON files or URLs and suggests mappings based on content analysis.
+
+<picture align="center">
+<img src="./public/notesdb-v1-create.jpg" style="width:100%; height:auto;">
+</picture>
+
+### Mapping JSON to Note
+
+**Visual Mapping Editor**: Drag-and-drop interface to define how JSON keys map to UI components (Headings, Text, Images).
+
+<picture align="center">
+<img src="./public/notesdb-v1-json-mapping.jpg" style="width:100%; height:auto;">
+</picture>
+
+### Agentic AI Local-First
+
+**Agentic AI**: Built-in "Research Lab" using local LLMs (WebLLM) or browser-native AI (Gemini Nano) for context-aware analysis.
+
+<picture align="center">
+<img src="./public/notesdb-v1-agentic.jpg" style="width:100%; height:auto;">
+</picture>
+
+<picture>
+  <img src="./public/4x4.png" alt="Overview" style="width:800px; height:32px">
+</picture>
 
 ## 1. Summary
 
@@ -17,6 +54,54 @@ NotesDB is a specialized tool designed to bridge the gap between raw data dumps,
 *   **Agentic AI**: Built-in "Research Lab" using local LLMs (WebLLM) or browser-native AI (Gemini Nano) for context-aware analysis.
 *   **Sync & Publish**: GitHub Gist integration for backup and sharing.
 *   **Webhooks**: Automated event triggers for integration with external services (Discord, Slack, etc.).
+
+
+<table>
+<tr>
+<td>
+<picture align="center">
+<img src="./public/notesdb-local-first-note-link.jpg" style="width:280px; height:auto;">
+<br>Internal links
+</picture>
+</td>
+<td>
+<picture align="center">
+<img src="./public/notesdb-local-first-encrypt.jpg" style="width:280px; height:auto;">
+<br>Encrypted Vault
+</picture>
+</td>
+<td>
+<picture align="center">
+<img src="./public/notesdb-local-first-storage-manager.jpg" style="width:280px; height:auto;">
+<br>Storage Manager
+</picture>
+</td>
+</tr>
+<tr>
+<td>
+<picture align="center">
+<img src="./public/notesdb-local-first-calendar.jpg" style="width:280px; height:auto;">
+<br>Calendar
+</picture>
+</td>
+<td>
+<picture align="center">
+<img src="./public/notesdb-local-first-3d-graph.jpg" style="width:280px; height:auto;">
+<br>3D Graph
+</picture>
+</td>
+<td>
+<picture align="center">
+<img src="./public/notesdb-v1-storage.jpg" style="width:280px; height:auto;">
+<br>Remote Storage
+</picture>
+</td>
+<tr>
+</table>
+
+<picture>
+  <img src="./public/4x4.png" alt="Overview" style="width:800px; height:32px">
+</picture>
 
 ## 3. Development & Architecture
 
@@ -165,3 +250,31 @@ A centralized color system ensures consistency across Tags, Categories, and the 
 *   **Editor Compatibility**: The TipTap editor's `@extension-color` strictly requires **Hex Codes**, not CSS classes.
     *   **Strategy**: The `Palette` component remains abstract, returning the color ID (e.g., `'red'`).
     *   **Conversion**: The consumer (e.g., `RichTextEditor.tsx`) maps this ID to a specific Hex code (e.g., `#ef4444`) before applying it to the editor state. This decoupling allows the UI to use flexible Tailwind themes while satisfying the editor's technical requirements.
+
+## License
+
+**MIT License**
+
+Copyright (c) 2026 Nuno Luciano
+
+Permission is hereby granted, free of charge, to any person obtaining a copy  
+of this software and associated documentation files (the "Software"), to deal  
+in the Software without restriction, including without limitation the rights  
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell  
+copies of the Software, and to permit persons to whom the Software is  
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all  
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,  
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE  
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  
+SOFTWARE.
+
+---
+
+Built with ❤️ (but no cookies 🍪 we respect your privacy and your health!)
