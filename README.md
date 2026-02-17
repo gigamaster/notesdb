@@ -43,16 +43,6 @@ Over time, NotesDB naturally evolved into a full-featured note-taking applicatio
 
 ## Quick Overview of Features
 
-*   **Smart Import Wizard**: Auto-detects collections in JSON files or URLs and suggests mappings based on content analysis.
-*   **Visual Mapping Editor**: Drag-and-drop interface to define how JSON keys map to UI components (Headings, Text, Images).
-*   **Local-First Architecture**: 100% offline functionality using IndexedDB for storage.
-*   **Encrypted Vault**: master password encryption for sensitive data.
-*   **Rich Text Editor**: Integrated TipTap editor with syntax highlighting, slash commands, and media embedding.
-*   **Agentic AI**: Built-in "Research Lab" using local LLMs (WebLLM) or browser-native AI (Gemini Nano) for context-aware analysis.
-*   **Sync & Publish**: GitHub Gist integration for backup and sharing.
-*   **Webhooks**: Automated event triggers for integration with external services (Discord, Slack, etc.).
-
-
 <table>
 <tr>
 <td>
@@ -95,6 +85,19 @@ Over time, NotesDB naturally evolved into a full-featured note-taking applicatio
 </td>
 </tr>
 </table>
+
+<picture>
+  <img src="./public/4x4.png" alt="Overview" style="width:800px; height:32px">
+</picture>
+
+*   **Smart Import Wizard**: Auto-detects collections in JSON files or URLs and suggests mappings based on content analysis.
+*   **Visual Mapping Editor**: Drag-and-drop interface to define how JSON keys map to UI components (Headings, Text, Images).
+*   **Local-First Architecture**: 100% offline functionality using IndexedDB for storage.
+*   **Encrypted Vault**: master password encryption for sensitive data.
+*   **Rich Text Editor**: Integrated TipTap editor with syntax highlighting, slash commands, and media embedding.
+*   **Agentic AI**: Built-in "Research Lab" using local LLMs (WebLLM) or browser-native AI (Gemini Nano) for context-aware analysis.
+*   **Sync & Publish**: GitHub Gist integration for backup and sharing.
+*   **Webhooks**: Automated event triggers for integration with external services (Discord, Slack, etc.).
 
 <picture>
   <img src="./public/4x4.png" alt="Overview" style="width:800px; height:32px">
