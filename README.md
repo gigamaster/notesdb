@@ -40,11 +40,8 @@ Over time, NotesDB naturally evolved into a full-featured note-taking applicatio
   <img src="./public/4x4.png" alt="Overview" style="width:800px; height:32px">
 </picture>
 
-## 1. Summary
 
-NotesDB is a specialized tool designed to bridge the gap between raw data dumps, originally from Proxy-Web XML converted to JSON, and usable knowledge. Its core mission is to **filter** complex JSON datasets, **map** relevant fields to semantic UI elements (Rich Text, Images, Code), and **save** them as clean, noise-free notes. By stripping away technical metadata and focusing on the content, it transforms machine-readable logs into human-readable insight, stored securely offline.
-
-## 2. Quick Overview of Features
+## Quick Overview of Features
 
 *   **Smart Import Wizard**: Auto-detects collections in JSON files or URLs and suggests mappings based on content analysis.
 *   **Visual Mapping Editor**: Drag-and-drop interface to define how JSON keys map to UI components (Headings, Text, Images).
@@ -103,18 +100,22 @@ NotesDB is a specialized tool designed to bridge the gap between raw data dumps,
   <img src="./public/4x4.png" alt="Overview" style="width:800px; height:32px">
 </picture>
 
-## 3. Development & Architecture
+## Development Notes
+
+NotesDB is a specialized tool designed to bridge the gap between raw data dumps, originally from Proxy-Web XML converted to JSON, and usable knowledge. Its core mission is to **filter** complex JSON datasets, **map** relevant fields to semantic UI elements (Rich Text, Images, Code), and **save** them as clean, noise-free notes. By stripping away technical metadata and focusing on the content, it transforms machine-readable logs into human-readable insight, stored securely offline.
+
+## 1. Architecture
 
 NotesDB is built as a highly optimized Single Page Application (SPA) focusing on performance and modularity.
 
-### Stack
+## 2. Stack
 
 *   **Framework**: React 18 + Vite
 *   **Storage**: Native IndexedDB (via `idb` wrappers)
 *   **Styling**: Tailwind CSS
 *   **Editor**: TipTap (Headless Prosemirror wrapper)
 
-### Architecture Highlights
+## 3. Architecture Highlights
 
 *   **Code Splitting**: The application utilizes `React.lazy()` and `<Suspense>` extensively. Heavy components like the `DashboardView`, `SettingsAdmin`, `LibraryView`, and modals are loaded only when requested. This keeps the initial bundle size small and ensures fast startup times.
 *   **Service Layer**: Database operations are abstracted into `services/db.ts`, handling connection pooling, migrations, and transactions outside UI components.
