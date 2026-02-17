@@ -1,0 +1,190 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme {
+--color-zinc-850: #1f1f22;
+--color-zinc-950: #0c0c0e;
+--font-sans: 'Inter', sans-serif;
+}
+
+/* Load Typography Plugin */
+@plugin "@tailwindcss/typography";
+
+/* Custom Utility for 11-column grid (Color Picker) */
+@utility grid-cols-11 {
+grid-template-columns: repeat(11, minmax(0, 1fr));
+}
+
+*::-webkit-scrollbar {
+width: 6px;
+height: 6px;
+scrollbar-gutter: stable;
+}
+
+*::-webkit-scrollbar-track {
+background: var(--color-zinc-900, #18181b);
+}
+
+*::-webkit-scrollbar-thumb {
+background: var(--color-zinc-800, #27272a);
+border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+background: var(--color-zinc-700, #3f3f47);
+}
+
+:root {
+color-scheme: dark; /* Forces native inputs (date, time, file) and scrollbars to dark mode */
+}
+
+body {
+background-color: #000;
+color: #d4d4d8;
+}
+
+/* Tiptap Editor Styles */
+.ProseMirror {
+outline: none;
+min-height: 200px;
+}
+.ProseMirror p.is-editor-empty:first-child::before {
+color: #52525b;
+content: attr(data-placeholder);
+float: left;
+height: 0;
+pointer-events: none;
+}
+
+/* Table Styles */
+.ProseMirror table {
+border-collapse: collapse;
+table-layout: fixed;
+width: 100%;
+margin: 0;
+overflow: hidden;
+}
+.ProseMirror table td,
+.ProseMirror table th {
+min-width: 1em;
+border: 1px solid #3f3f46; /* zinc-700 */
+padding: 6px 8px;
+vertical-align: top;
+box-sizing: border-box;
+position: relative;
+}
+.ProseMirror table th {
+font-weight: bold;
+text-align: left;
+background-color: #18181b; /* zinc-900 */
+}
+.ProseMirror table .selectedCell:after {
+z-index: 2;
+position: absolute;
+content: "";
+left: 0; right: 0; top: 0; bottom: 0;
+background: rgba(99, 102, 241, 0.2); /* indigo-500/20 */
+pointer-events: none;
+}
+
+/* Highlight.js overrides for Tiptap integration */
+pre {
+background: #0d0d0d;
+color: #fff;
+font-family: 'JetBrainsMono', monospace;
+padding: 0.75rem 1rem;
+border-radius: 0.5rem;
+}
+pre code {
+color: inherit;
+padding: 0;
+background: none;
+font-size: 0.8rem;
+}
+
+/* Image Styles in Editor */
+.ProseMirror img {
+border-radius: 0.5rem;
+max-width: 100%;
+height: auto;
+}
+.ProseMirror img.ProseMirror-selectednode {
+outline: 2px solid #6366f1;
+}
+
+/* Video/Embed Styles */
+.ProseMirror iframe {
+border-radius: 0.5rem;
+border: 1px solid #27272a;
+background: #000;
+}
+.ProseMirror div[data-youtube-video] {
+cursor: move;
+padding-right: 24px;
+}
+/* NoteLink Styles */
+.note-link {
+color: #818cf8; /* indigo-400 */
+cursor: pointer;
+text-decoration: none;
+background: rgba(99, 102, 241, 0.1);
+padding: 0 4px;
+border-radius: 4px;
+transition: all 0.2s;
+}
+.note-link:hover {
+background: rgba(99, 102, 241, 0.2);
+text-decoration: underline;
+}
+
+/* Tippy.js Custom Theme (Zinc) */
+.tippy-box[data-theme~='zinc'] {
+background-color: #18181b; /* zinc-900 */
+color: #e4e4e7; /* zinc-200 */
+border: 1px solid #27272a; /* zinc-800 */
+border-radius: 6px;
+font-size: 11px;
+font-weight: 500;
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+padding: 2px 4px;
+}
+
+/* Tippy Animation: Shift-Away (Simulated) */
+.tippy-box[data-animation='shift-away'][data-state='hidden'] {
+opacity: 0;
+}
+.tippy-box[data-animation='shift-away'] {
+transform-origin: bottom;
+transition-property: transform, visibility, opacity;
+}
+.tippy-box[data-animation='shift-away'][data-state='hidden'][data-placement^='top'] {
+transform: translateY(10px);
+}
+.tippy-box[data-animation='shift-away'][data-state='hidden'][data-placement^='bottom'] {
+transform: translateY(-10px);
+}
+
+/* Print Styles */
+@media print {
+body {
+    background-color: white;
+    color: black;
+}
+aside, header, nav, button, .no-print {
+    display: none !important;
+}
+/* Ensure main content takes full width */
+main {
+    position: static;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+}
+/* Hide scrollbars in print */
+::-webkit-scrollbar {
+    display: none;
+}
+}
