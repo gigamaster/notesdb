@@ -96,7 +96,7 @@ NotesDB is a specialized tool designed to bridge the gap between raw data dumps,
 <br>Remote Storage
 </picture>
 </td>
-<tr>
+</tr>
 </table>
 
 <picture>
