@@ -1,5 +1,7 @@
 # NotesDB Local-First
-**version 1.2.7**
+
+**version 1.2.7** ~4.5Mb / ~1.5Mb gzip 
+#poc #conceptual #showcase 
 
 NotesDB began as a noise-free tool designed to filter data and focus on essential information. It was originally created as a companion app for Proxy-Web, a client-side server that runs in the browser and generates typed JSON from RSS feeds. Proxy-Web follows a local-first architecture, storing queries in IndexedDB and serving them as an offline-capable API, even during network blackouts.
 Over time, NotesDB naturally evolved into a full-featured note-taking application. It has since been extended with a calendar, a 3D graph view, and a bookmark manager, while maintaining strong privacy through the Web Crypto API for protecting sensitive information.
